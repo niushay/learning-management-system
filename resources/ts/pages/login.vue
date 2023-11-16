@@ -11,9 +11,7 @@ const form = ref(new Form({
 }))
 
 async function login() {
-  const response = await form.value.post(route('test'))
-
-  console.log(response)
+  await form.value.post(route('auth.login'))
 }
 </script>
 
@@ -49,8 +47,7 @@ async function login() {
 
       <VCardText>
         <VForm
-          @submit.prevent="login"
-          @keydown="form.onKeydown($event)">
+          @submit.prevent="login">
           <VRow>
             <!-- email -->
             <VCol cols="12">

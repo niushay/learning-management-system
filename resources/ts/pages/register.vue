@@ -1,15 +1,32 @@
 <script setup lang="ts">
+import Form from 'vform'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
 
-const form = ref({
+const vue_router = useRouter();
+
+const form = ref(new Form({
   username: '',
   email: '',
   password: '',
+  password_confirmation: '',
   privacyPolicies: false,
-})
+}))
 
+const errors = ref(null)
 const isPasswordVisible = ref(false)
+const isPasswordConfirmationVisible = ref(false)
+
+const register = async () => {
+  form.value.post(route('auth.register'))
+    .then(() => {
+      vue_router.push('/')
+    })
+    .catch(e => {
+      errors.value = e.response.data.errors
+      console.error(errors.value)
+    })
+}
 </script>
 
 <template>
@@ -34,16 +51,24 @@ const isPasswordVisible = ref(false)
       </VCardItem>
 
       <VCardText class="pt-2">
-        <h5 class="text-h5 mb-1">
-          Adventure starts here 🚀
-        </h5>
         <p class="mb-0">
-          Make your app management easy and fun!
+          manage your system easy!
         </p>
+      </VCardText>
+      <VCardText class="pt-2 text-error">
+        <div v-for="(errorMessages, field) in errors" :key="field">
+          <ul>
+            <li v-for="(error, index) in errorMessages" :key="index">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="$router.push('/')">
+        <VForm
+            @submit.prevent="register"
+          @keydown="form.onKeydown($event)">
           <VRow>
             <!-- Username -->
             <VCol cols="12">
@@ -51,7 +76,7 @@ const isPasswordVisible = ref(false)
                 v-model="form.username"
                 autofocus
                 label="Username"
-                placeholder="Johndoe"
+                placeholder="admin"
               />
             </VCol>
             <!-- email -->
@@ -59,7 +84,7 @@ const isPasswordVisible = ref(false)
               <VTextField
                 v-model="form.email"
                 label="Email"
-                placeholder="johndoe@email.com"
+                placeholder="admin@email.com"
                 type="email"
               />
             </VCol>
@@ -73,6 +98,16 @@ const isPasswordVisible = ref(false)
                 :type="isPasswordVisible ? 'text' : 'password'"
                 :append-inner-icon="isPasswordVisible ? 'bx-hide' : 'bx-show'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
+              />
+            </VCol>
+            <VCol cols="12">
+              <VTextField
+                v-model="form.password_confirmation"
+                label="Password Confirmation"
+                placeholder="············"
+                :type="isPasswordConfirmationVisible ? 'text' : 'password'"
+                :append-inner-icon="isPasswordConfirmationVisible ? 'bx-hide' : 'bx-show'"
+                @click:append-inner="isPasswordConfirmationVisible = !isPasswordConfirmationVisible"
               />
               <div class="d-flex align-center mt-1 mb-4">
                 <VCheckbox
@@ -99,6 +134,7 @@ const isPasswordVisible = ref(false)
                 Sign up
               </VBtn>
             </VCol>
+
 
             <!-- login instead -->
             <VCol
