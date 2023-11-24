@@ -10,7 +10,7 @@ const router = createRouter({
       children: [
         {
           path: 'dashboard',
-          component: () => import('../pages/dashboard.vue'),
+          component: () => import('../pages/Dashboard.vue'),
         },
         {
           path: 'account-settings',
@@ -44,7 +44,7 @@ const router = createRouter({
       children: [
         {
           path: 'login',
-          component: () => import('../pages/login.vue'),
+          component: () => import('../pages/Login.vue'),
         },
         {
           path: 'register',

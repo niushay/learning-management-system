@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { NavLink } from '@layouts/types'
+import { Link } from '@inertiajs/vue3'
 
 defineProps<{
   item: NavLink
@@ -11,11 +12,7 @@ defineProps<{
     class="nav-link"
     :class="{ disabled: item.disable }"
   >
-    <Component
-      :is="item.to ? 'RouterLink' : 'a'"
-      :to="item.to"
-      :href="item.href"
-    >
+    <Link :href="route(item.to)">
       <VIcon
         :icon="item.icon"
         class="nav-item-icon"
@@ -24,7 +21,7 @@ defineProps<{
       <span class="nav-item-title">
         {{ item.title }}
       </span>
-    </Component>
+    </Link>
   </li>
 </template>
 

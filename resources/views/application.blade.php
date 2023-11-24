@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learning Management System</title>
   <link rel="stylesheet" type="text/css" href="{{ asset('loader.css') }}" />
+{{--  @vite(['resources/ts/main.ts', "resources/ts/Pages/{$page['component']}.vue"])--}}
   @vite(['resources/ts/main.ts'])
+{{--  @inertiaHead--}}
+
 </head>
 
 <body>
@@ -57,8 +60,9 @@
       </div>
     </div>
   </div>
-  
-  <script>
+{{--@inertia--}}
+
+<script>
     const loaderColor = localStorage.getItem('initial-loader-bg') || '#FFFFFF'
     const primaryColor = localStorage.getItem('initial-loader-color') || '#696CFF'
 

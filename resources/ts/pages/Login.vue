@@ -1,4 +1,30 @@
 <script setup lang="ts">
+// // import Form from 'vform'
+// import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
+// import logo from '@images/logo.svg?raw'
+// import { useForm } from "@inertiajs/vue3";
+//
+// const isPasswordVisible = ref(false)
+//
+// defineProps<{
+//   canResetPassword?: boolean
+//   status?: string
+// }>()
+//
+// const form = useForm({
+//   email: '',
+//   password: '',
+//   remember: false,
+// })
+//
+// const submit = () => {
+//   form.post(route('auth.attemptLogin'), {
+//     onFinish: () => {
+//       form.reset('password')
+//     },
+//   })
+// }
+
 import Form from 'vform'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
@@ -10,8 +36,8 @@ const form = ref(new Form({
   password: '',
 }))
 
-async function login() {
-  await form.value.post(route('auth.login'))
+async function submit() {
+  await form.value.post(route('auth.attemptLogin'))
 }
 </script>
 
@@ -46,14 +72,13 @@ async function login() {
       </VCardText>
 
       <VCardText>
-        <VForm
-          @submit.prevent="login">
+        <VForm @submit.prevent="submit">
           <VRow>
             <!-- email -->
             <VCol cols="12">
               <VTextField
                 v-model="form.email"
-                autofocus
+                autofocus="true"
                 placeholder="johndoe@email.com"
                 label="Email"
                 type="email"

@@ -1,13 +1,16 @@
-<script setup lang="ts">
+<script setup>
 import Layout from '../layouts/default.vue'
+
+defineProps({ user: Object })
 </script>
 
 <template>
   <Layout>
     <VRow>
+
       <VCol cols="12">
-        <VCard title="News">
-          <h1>News</h1>
+        <VCard title="Dashboard">
+
         </VCard>
       </VCol>
     </VRow>

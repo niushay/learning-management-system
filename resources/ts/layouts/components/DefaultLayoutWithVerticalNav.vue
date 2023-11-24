@@ -66,14 +66,14 @@ const upgradeBanner = computed(() => {
         :item="{
           title: 'Dashboard',
           icon: 'bx-home',
-          to: '/dashboard',
+          to: 'dashboard',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'News',
           icon: 'bx-news',
-          to: '/news',
+          to: 'news.index',
         }"
       />
 
@@ -87,35 +87,35 @@ const upgradeBanner = computed(() => {
         :item="{
           title: 'Lecturers',
           icon: 'bx-user',
-          to: '/users/lecturer',
+          to: 'users.lecturer',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'Students',
           icon: 'bxs-face',
-          to: '/users/student',
+          to: 'users.student',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'Department',
           icon: 'bx-home-alt',
-          to: '/departments',
+          to: 'departments',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'Courses',
           icon: 'bx-notepad',
-          to: '/courses',
+          to: 'courses',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'Results',
           icon: 'bx-pen',
-          to: '/results',
+          to: 'results',
         }"
       />
     </template>

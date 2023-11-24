@@ -8,7 +8,7 @@ export default defineComponent({
     const isLayoutOverlayVisible = ref(false)
     const toggleIsOverlayNavActive = useToggle(isOverlayNavActive)
 
-    const route = useRoute()
+    // const route = useRoute()
     const { mdAndDown } = useDisplay()
 
     // ℹ️ This is alternative to below two commented watcher
@@ -77,7 +77,6 @@ export default defineComponent({
           class: [
             'layout-wrapper layout-nav-type-vertical layout-navbar-static layout-footer-static layout-content-width-fluid',
             mdAndDown.value && 'layout-overlay-nav',
-            route.meta.layoutWrapperClasses,
           ],
         },
         [

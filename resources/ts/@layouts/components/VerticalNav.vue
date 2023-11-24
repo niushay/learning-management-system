@@ -3,6 +3,7 @@ import type { Component } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { useDisplay } from 'vuetify'
 import logo from '@images/n-logo.svg?raw'
+import { Link } from '@inertiajs/vue3'
 
 interface Props {
   tag?: string | Component
@@ -22,10 +23,10 @@ const refNav = ref()
   ℹ️ Close overlay side when route is changed
   Close overlay vertical nav when link is clicked
 */
-const route = useRoute()
+// const route = useRoute()
 
 watch(
-  () => route.path,
+  () => 'dashboard', //TODO:: Should be dynamic
   () => {
     props.toggleIsOverlayNavActive(false)
   })
@@ -54,8 +55,8 @@ const handleNavScroll = (evt: Event) => {
     <!-- 👉 Header -->
     <div class="nav-header">
       <slot name="nav-header">
-        <RouterLink
-          to="/"
+        <Link
+          :href="route('auth.login')"
           class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
           <div
@@ -66,7 +67,7 @@ const handleNavScroll = (evt: Event) => {
           <h1 class="leading-normal">
             Niusha
           </h1>
-        </RouterLink>
+        </Link>
       </slot>
     </div>
     <slot name="before-nav-items">
