@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import avatar from '@images/avatars/no-avatar.png'
+import { router } from '@inertiajs/vue3'
+
+const logout = () => {
+  router.post('/logout')
+}
 </script>
 
 <template>
@@ -80,46 +85,19 @@ import avatar from '@images/avatars/no-avatar.png'
             <VListItemTitle>Settings</VListItemTitle>
           </VListItem>
 
-          <!-- 👉 Pricing -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="bx-dollar"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Pricing</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 FAQ -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="bx-help-circle"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>FAQ</VListItemTitle>
-          </VListItem>
-
           <!-- Divider -->
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="bx-log-out"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Logout</VListItemTitle>
+          <VListItem @click="logout">
+                <template #prepend>
+                  <VIcon
+                    class="me-2"
+                    icon="bx-log-out"
+                    size="22"
+                  />
+                </template>
+              <VListItemTitle>Logout</VListItemTitle>
           </VListItem>
         </VList>
       </VMenu>
