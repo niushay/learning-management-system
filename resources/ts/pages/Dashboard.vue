@@ -7,10 +7,8 @@ defineProps({ user: Object })
 <template>
   <Layout>
     <VRow>
-
       <VCol cols="12">
         <VCard title="Dashboard">
-
         </VCard>
       </VCol>
     </VRow>
