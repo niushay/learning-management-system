@@ -5,16 +5,28 @@ import BlankLayout from '../layouts/blank.vue'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
 
+defineProps({ errors: Object })
+
 const isPasswordVisible = ref(false)
 
 const form = reactive({
   email: null,
   password: null,
+  remember: false,
 })
 
-function submit() {
+async function submit() {
   router.post('/login', form)
 }
+
+const emailRules = [
+  (v: string) => !!v || 'Email is required',
+  (v: string) => /.+@.+\..+/.test(v) || 'Enter a valid email address',
+]
+
+const passwordRules = [
+  (v: string) => !!v || 'Password is required',
+]
 </script>
 
 <template>
@@ -34,12 +46,12 @@ function submit() {
             </div>
           </template>
           <VCardTitle class="text-2xl font-weight-bold">
-            Learning Management System
+            Learning Platform
           </VCardTitle>
         </VCardItem>
         <VCardText class="pt-2">
           <h5 class="text-h5 mb-1">
-            Welcome to Learning Management System! 👋🏻
+            Welcome to Learning Platform!
           </h5>
           <p class="mb-0">
             Please sign-in to your account and start the adventure
@@ -52,13 +64,14 @@ function submit() {
               <VCol cols="12">
                 <VTextField
                   v-model="form.email"
-                  autofocus="true"
+                  autocapitalize="off"
                   placeholder="johndoe@email.com"
                   label="Email"
                   type="email"
+                  :error-messages="errors?.email"
+                  :rules="emailRules"
                 />
               </VCol>
-
               <!-- password -->
               <VCol cols="12">
                 <VTextField
@@ -67,9 +80,10 @@ function submit() {
                   placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'bx-hide' : 'bx-show'"
+                  :error-messages="errors?.password"
+                  :rules="passwordRules"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
-
                 <!-- remember me checkbox -->
                 <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
                   <VCheckbox
