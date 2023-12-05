@@ -46,5 +46,3 @@ Route::middleware('auth')->group(function () {
         Route::get('/students', [ProfileController::class, 'index'])->name('student');
     });
 });
-
-require __DIR__.'/auth.php';

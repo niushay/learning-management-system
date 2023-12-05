@@ -1,4 +1,4 @@
-<?php
+New <?php
 
 use App\Providers\RouteServiceProvider;
 
